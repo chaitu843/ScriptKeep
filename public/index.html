@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>&laquo;--Keep it..!!!--&raquo;</title>
+    <link rel="icon" href="./public/assets/keep.ico" type="image/gif" sizes="16x16">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">
+            KeePer's Things
+        </a>
+    </nav>
+    <div class="container my-5">
+        <div class="row" id="content">
+            
+        </div>
+
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create a Note</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group" id="form">
+                            <!-- <label for="listTitle">Enter your title</label> -->
+                            <input type="text" class="form-control" id="listTitle" placeholder="Note Title">
+                            <input type="text" class="form-control form-control-sm listItems" id="listItem" placeholder="list item">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning" id="saveButton">Push it..!!!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <button type="button" class="btn btn-dark" id="createButton" data-toggle="modal" data-target="#myModal">Create A Note</button>
+    </footer>
+</body>
+
+</html>
