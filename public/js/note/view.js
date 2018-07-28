@@ -19,7 +19,7 @@ export function displayNoteView(listData) {
     if (key === 'title' || key === 'id') continue;
     if (listData.hasOwnProperty(key)) {
       const val = listData[key];
-      html += `<li>${val}</li>`;
+      html += `<li>${val.item}</li>`;
     }
   }
 
@@ -41,18 +41,23 @@ export function displayNoteView(listData) {
 function showNote(div){
     const children = div.children;
     const title = children[0].firstElementChild.innerHTML;
-    let html = `<input type="text" class="form-control" placeholder="Note Title" value="${title}>`;
-    let i = 1;
-    const list = children[2].children;
-    for (let item in list) {
-        // const myVariable = children[child].value;
-        // if (child === '0' || typeof (myVariable) === 'undefined' || myVariable === '') continue;
-        html += `<input type="text" class="form-control form-control-sm listItems" placeholder="list item" value = ${item.innerHTML}>`;
-        i++;
-    }
-
+    const html = `<input type="text" class="form-control" value=${title}>`;
     const noteForm = document.getElementById('noteModalForm');
     noteForm.innerHTML = "";
-    var elet = createHTMLElement(html);
-    noteForm.appendChild(elet);
+    noteForm.appendChild(createHTMLElement(html));
+
+    let form = `<div>`;
+    const list = children[2].children;
+
+
+    for (let item in list) {
+        const myVariable = `${list[item].innerHTML}`;
+        if (typeof(myVariable) === "undefined" || item === "length" || item === "item" || item === "namedItem") continue;
+        form += `<div class = "listItems"><input type="checkbox" class="form-check-input" id="${item}" value="${list[item].innerHTML}">
+                <label class="form-check-label" for="${item}">${list[item].innerHTML}</label></div>`;
+    }
+    form+=`</div>`;
+    const noteFormCheck = document.getElementById('noteModalCheck');
+    noteFormCheck.innerHTML = "";
+    noteFormCheck.appendChild(createHTMLElement(form));
 }

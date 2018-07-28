@@ -15,8 +15,14 @@ export function displayNote(){
     let i = 1;
     for(let child in children){
         const myVariable = children[child].value;
-        if(child==="0" || typeof(myVariable) === "undefined" || myVariable==="") continue;
-        listData[i] = myVariable;
+        if(child==="0" || typeof(myVariable) === "undefined" || myVariable===""){
+            console.log('x');
+            continue;
+        } 
+        listData[i] = {
+            "item" : myVariable,
+            "completed" : false
+        };
         i++;
     }
 
@@ -71,4 +77,16 @@ export function deleteNote(id){
     }
 
     fetch(url,fetchData);
+}
+
+export function updateNote(){
+    const childDiv = document.getElementById('noteModalCheck').firstChild.children;
+    let i=0;
+    while(i<childDiv.length){
+        const div = childDiv[i];
+        if(div.firstElementChild.checked===true){
+            console.log(div.firstElementChild.value);
+        }
+        i++;
+    }
 }

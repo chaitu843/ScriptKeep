@@ -1,11 +1,20 @@
 {
   "notes": [
     {
-      "1": "1",
-      "2": "3",
-      "3": "4",
-      "id": 197558,
-      "title": "1"
+      "1": {
+        "item": "1",
+        "completed": false
+      },
+      "2": {
+        "item": "2",
+        "completed": false
+      },
+      "3": {
+        "item": "3",
+        "completed": false
+      },
+      "id": 481987,
+      "title": "Medhu"
     }
   ]
 }
