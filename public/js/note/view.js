@@ -19,7 +19,12 @@ export function displayNoteView(listData) {
     if (key === 'title' || key === 'id') continue;
     if (listData.hasOwnProperty(key)) {
       const val = listData[key];
-      html += `<li>${val.item}</li>`;
+      if(val.completed===true){
+        html += `<li><div>${val.item}<span title="${val.date}" class="tick">&#10004;</span></div></li>`;
+      }else{
+        html += `<li>${val.item}</li>`;
+      }
+      
     }
   }
 
@@ -46,18 +51,27 @@ function showNote(div){
     noteForm.innerHTML = "";
     noteForm.appendChild(createHTMLElement(html));
 
-    let form = `<div>`;
+    let form = `<div>
+                <input type="hidden" value="${div.id}">`;
     const list = children[2].children;
 
 
     for (let item in list) {
         const myVariable = `${list[item].innerHTML}`;
         if (typeof(myVariable) === "undefined" || item === "length" || item === "item" || item === "namedItem") continue;
-        form += `<div class = "listItems"><input type="checkbox" class="form-check-input" id="${item}" value="${list[item].innerHTML}">
-                <label class="form-check-label" for="${item}">${list[item].innerHTML}</label></div>`;
+        if(list[item].firstElementChild!==null) {
+          let str = list[item].firstElementChild.innerText;
+          form += `<div class = "listItems"><input type="checkbox" checked="true" class="form-check-input" id="${item}" value="${str.substr(0,str.length-1)}">
+                <label class="form-check-label" for="${item}">${str.substr(0,str.length-1)}</label></div>`;
+                continue;
+        }; 
+        form += `<div class = "listItems"><input type="checkbox" class="form-check-input" id="${item}" value="${myVariable}">
+                <label class="form-check-label" for="${item}">${myVariable}</label></div>`;
     }
     form+=`</div>`;
     const noteFormCheck = document.getElementById('noteModalCheck');
     noteFormCheck.innerHTML = "";
     noteFormCheck.appendChild(createHTMLElement(form));
 }
+
+//In displayNoteView method, Check for completed status and change the view accordingly

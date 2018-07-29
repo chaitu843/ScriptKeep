@@ -47,6 +47,7 @@ export function displayNote(){
 }
 
 export function reload(){
+    document.getElementById('content').innerHTML = ""; //for relaoding after updation
     const url = "http://localhost:3000/notes";
 
     fetch(url)
@@ -81,12 +82,45 @@ export function deleteNote(id){
 
 export function updateNote(){
     const childDiv = document.getElementById('noteModalCheck').firstChild.children;
-    let i=0;
+    let i=1;
+    let listData = {
+        "id" : parseInt(childDiv[0].value)-1,
+        "title" : document.getElementById('noteModalForm').firstElementChild.value,
+    }
     while(i<childDiv.length){
         const div = childDiv[i];
         if(div.firstElementChild.checked===true){
-            console.log(div.firstElementChild.value);
+            let date = new Date();
+            listData[i] = {
+                "item" : div.firstElementChild.value,
+                "completed" : true,
+                "date" : date.toDateString().substr(4) + " " + date.toTimeString().substr(0,8)
+            };
+        }else{
+            listData[i] = {
+                "item" : div.firstElementChild.value,
+                "completed" : false
+            };
         }
         i++;
     }
+    const url = `http://localhost:3000/notes/${listData.id}`;
+    const fetchData = {
+        method: "PUT", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, same-origin, *omit
+        headers: {
+            "Content-Type": "application/json; charset=utf-8",
+            // "Content-Type": "application/x-www-form-urlencoded",
+        },
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+        body: JSON.stringify(listData) // body data type must match "Content-Type" header
+    }
+
+    fetch(url,fetchData)
+    .then(()=>{
+        reload();
+    });
 }

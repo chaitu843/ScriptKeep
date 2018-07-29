@@ -21,3 +21,16 @@
 .noteElements{
     padding: 1.25rem;
 }
+
+.tick{
+    float: right;
+    color: green;
+}
+
+@media (min-width: 768px)
+{
+.col-md-2 {
+    flex: 0 0 22%;
+    max-width: 22%;
+}
+}
