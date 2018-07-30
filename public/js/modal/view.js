@@ -1,6 +1,6 @@
-import { createHTMLElement } from '../view';
+import createHTMLElement from '../view';
 
-export function addListItem(e) {
+export function addListItem() {
   const html = '<input type="text" class="form-control form-control-sm listItems" placeholder="list item">';
   const form = document.getElementById('form');
   const input = createHTMLElement(html);
@@ -12,8 +12,6 @@ export function addListItem(e) {
 }
 
 export function refreshModal() {
-  const html = `<input type="text" class="form-control" id="listTitle" placeholder="Note Title">
-    <input type="text" class="form-control form-control-sm listItems" id="listItem" placeholder="list item">`;
   const form = document.getElementById('myForm');
   form.reset();
   const children = document.getElementById('form').children;

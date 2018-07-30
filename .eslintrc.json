@@ -1,19 +1,17 @@
 {
     "extends": "airbnb-base",
-    "env":{
+    "env": {
         "browser": true,
-        "node":true
+        "node": true
+    },
+    "rules": {
+        "prefer-destructuring": [
+            "error",
+            {
+                "object": false,
+                "array": false
+            }
+        ],
+        "import/no-cycle": "off"
     }
 }
-
-// {
-//     "extends": "airbnb-base",
-//     "env" : {
-//     "browser": true
-//     },
-//     "rules": {
-//     "prefer-destructuring": ["error", {"object": false, "array": false}],
-//     "import/no-cycle": "off"
-//     }
-//     } 
-    
