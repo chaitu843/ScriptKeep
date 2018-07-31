@@ -14,13 +14,14 @@ export function displayNote() {
   };
   let i = 1;
   for (const child in children) {
-    const myVariable = children[child].value;
-    if (child === '0' || typeof (myVariable) === 'undefined' || myVariable === '') continue;
-    listData[i] = {
-      item: myVariable,
-      completed: false,
-    };
-    i += 1;
+    // if (child === '0' || typeof (myVariable) === 'undefined' || myVariable === '') continue;
+    if (child !== '0' && typeof (children[child].value) !== 'undefined' && children[child].value !== '') {
+      listData[i] = {
+        item: children[child].value,
+        completed: false,
+      };
+      i += 1;
+    }
   }
 
   displayNoteView(listData);
@@ -52,6 +53,7 @@ export function reload() {
     .then((data) => {
       data.map((object) => {
         displayNoteView(object);
+        return null;
       });
     });
 }
@@ -80,7 +82,7 @@ export function updateNote() {
   const childDiv = document.getElementById('noteModalCheck').firstChild.children;
   let i = 1;
   const listData = {
-    id: parseInt(childDiv[0].value) - 1,
+    id: parseInt(childDiv[0].value, 10) - 1,
     title: document.getElementById('noteModalForm').firstElementChild.value,
   };
   while (i < childDiv.length) {

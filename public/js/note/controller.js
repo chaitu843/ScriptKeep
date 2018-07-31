@@ -6,5 +6,3 @@ saveNote.onclick = () => {
   updateNote();
 };
 reload();
-
-

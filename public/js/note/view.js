@@ -15,16 +15,16 @@ function showNote(div) {
 
 
   for (const item in list) {
-    const myVariable = `${list[item].innerHTML}`;
-    if (typeof (myVariable) === 'undefined' || item === 'length' || item === 'item' || item === 'namedItem') continue;
-    if (list[item].firstElementChild !== null) {
-      const str = list[item].firstElementChild.innerText;
-      form += `<div class = "listItems"><input type="checkbox" checked="true" class="form-check-input" id="${item}" value="${str.substr(0, str.length - 1)}">
+    if (typeof (list[item].innerHTML) !== 'undefined' && item !== 'length' && item !== 'item' && item !== 'namedItem') {
+      if (list[item].firstElementChild !== null) {
+        const str = list[item].firstElementChild.innerText;
+        form += `<div class = "listItems"><input type="checkbox" checked="true" class="form-check-input" id="${item}" value="${str.substr(0, str.length - 1)}">
                 <label class="form-check-label" for="${item}">${str.substr(0, str.length - 1)}</label></div>`;
-      continue;
+        continue;
+      }
+      form += `<div class = "listItems"><input type="checkbox" class="form-check-input" id="${item}" value="${list[item].innerHTML}">
+                <label class="form-check-label" for="${item}">${list[item].innerHTML}</label></div>`;
     }
-    form += `<div class = "listItems"><input type="checkbox" class="form-check-input" id="${item}" value="${myVariable}">
-                <label class="form-check-label" for="${item}">${myVariable}</label></div>`;
   }
   form += '</div>';
   const noteFormCheck = document.getElementById('noteModalCheck');
@@ -34,7 +34,7 @@ function showNote(div) {
 
 export default function displayNoteView(listData) {
   const content = document.getElementById('content');
-  const divID = parseInt(`${listData.id}`) + 1;
+  const divID = parseInt(`${listData.id}`, 10) + 1;
   let html = `<div class="card col-md-2 my-3 mx-3" data-toggle = "modal" data-target = "#noteModal" id="${divID}">
                 <div class = "title">
                     <h4>${listData.title}</h4>
@@ -46,8 +46,7 @@ export default function displayNoteView(listData) {
                     <ul>`;
 
   for (const key in listData) {
-    if (key === 'title' || key === 'id') continue;
-    if (listData.hasOwnProperty(key)) {
+    if (key !== 'title' && key !== 'id') {
       const val = listData[key];
       if (val.completed === true) {
         html += `<li><div>${val.item}<span title="${val.date}" class="tick">&#10004;</span></div></li>`;
